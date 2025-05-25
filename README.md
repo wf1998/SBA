@@ -1,4 +1,4 @@
-## Data Availability Statement
+## Statement
 
 Due to the sensitive or proprietary nature of our full training dataset (e.g., high-cost annotated data, synthetic data with privacy considerations, and data subject to third-party usage agreements), we are unable to publicly release the complete dataset for now. To ensure transparency and reproducibility of our research, we have provided the following:
 
