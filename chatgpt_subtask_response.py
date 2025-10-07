@@ -3,16 +3,16 @@ import json
 import time
 
 key='API Key'
-client = OpenAI(api_key=key)  # 替换为你的 API Key
+client = OpenAI(api_key=key)  
 
 input_path = "split_output.jsonl"
 output_path = "subtask_answers.jsonl"
 
-# 读取输入数据
+
 with open(input_path, "r", encoding="utf-8") as f:
     records = [json.loads(line) for line in f if line.strip()]
 
-# 输出文件
+
 with open(output_path, "w", encoding="utf-8") as out_file:
     for idx, record in enumerate(records):
         intent = record["intent"]
@@ -44,9 +44,9 @@ with open(output_path, "w", encoding="utf-8") as out_file:
                 "response": reply
             })
 
-            time.sleep(0.5)  # 控制速率
+            time.sleep(0.5)  
 
-        # 写入结果
+        
         output_record = {
             "intent": intent,
             "subtask_responses": subtask_responses
