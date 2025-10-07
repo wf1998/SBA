@@ -26,4 +26,4 @@ with open(input_file, "r", encoding="utf-8") as f_in, \
         }
         f_out.write(json.dumps(data, ensure_ascii=False) + "\n")
 
-print(f"已保存到 {output_file}")
+print(f"{output_file}")
