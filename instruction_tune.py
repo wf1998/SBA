@@ -48,7 +48,7 @@ dataset = dataset.map(tokenize, batched=False)
 lora_config = LoraConfig(
     r=8,
     lora_alpha=16,
-    target_modules=["q_proj", "v_proj"],  # 适配Llama3结构
+    target_modules=["q_proj", "v_proj"], 
     lora_dropout=0.05,
     bias="none",
     task_type="CAUSAL_LM"
@@ -92,7 +92,7 @@ class CustomTrainer(Trainer):
             if not indices:
                 continue
             if len(indices) > 64:
-                indices = indices[:64]  # 限制长度防止OOM
+                indices = indices[:64]  
             target_ids = labels[b][indices].unsqueeze(0)
             pred_ids = input_ids[b][indices].unsqueeze(0)
             target_emb = get_token_embeddings(target_ids, model, tokenizer)
