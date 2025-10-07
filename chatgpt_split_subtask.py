@@ -4,29 +4,27 @@ import time
 import re
 
 key='API Key'
-client = OpenAI(api_key=key)  # 替换为你的 API Key
+client = OpenAI(api_key=key) 
 
-# 路径
+
 system_prompt_path = "Prompt/split_prompt.txt"
 intent_data_path = "intent_dataset_merged.jsonl"
 output_path = "split_output.jsonl"
 
-# 读取系统 prompt 模板
+
 with open(system_prompt_path, "r", encoding="utf-8") as f:
     system_prompt_template = f.read().strip()
 
-# 读取意图数据
+
 with open(intent_data_path, "r", encoding="utf-8") as f:
     intent_entries = [json.loads(line) for line in f if line.strip()]
 
 def try_parse_json(content: str):
-    """尝试修复非法 JSON 并解析"""
     try:
         return json.loads(content)
     except json.JSONDecodeError:
         pass
 
-    # 尝试提取大括号内的 JSON 块
     match = re.search(r"\{.*\}", content, re.DOTALL)
     if match:
         try:
@@ -34,7 +32,6 @@ def try_parse_json(content: str):
         except json.JSONDecodeError:
             pass
 
-    # 最后尝试替换错误的引号、逗号等（简单修复）
     repaired = (
         content.replace("'", '"')
         .replace("False", "false")
@@ -47,7 +44,6 @@ def try_parse_json(content: str):
     except json.JSONDecodeError:
         return {"parse_error": content.strip()}
 
-# 写入输出
 with open(output_path, "w", encoding="utf-8") as out_file:
     for idx, entry in enumerate(intent_entries):
         intent_text = entry["prompt"]
